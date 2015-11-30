@@ -82,8 +82,6 @@ def new_thread():
                     op_id   = 0)     # Threads are normal posts with op_id set to 0
 
     newPost.last_bump = datetime.now()
-    thread_id = newPost.id
-    print(thread_id, type(thread_id))
 
     db.session.add(newPost)
     db.session.commit()
