@@ -1,3 +1,7 @@
+# This configuration file is provided to make testing easy. Your real
+# configuration should not be checked into source control. See:
+# http://blog.arvidandersson.se/2013/06/10/credentials-in-git-repos
+
 import os
 
 DEBUG = True
