@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block body %}
+<div id=wrap>
+
+<div id=left>
+{% for entry in entries %}
+{% if entry.op_id %}
+<div class=post>
+{% else %}
+<hr>
+<div class=thread>
+{% endif %}
+	<div class='byline'>
+		{% if not entry.op_id %}
+		<a href=/{{ entry.board }}>/{{ entry.board }}/</a>
+		{% endif %}
+		<span>{{ entry.subject }}</span>
+		<span>
+			{% if entry.email %}
+			<a href="mailto:{{ entry.email }}">{{ entry.name }}</a>
+			{% else %}
+			{{ entry.name }}
+			{% endif %}
+		</span>
+		<span>{{ entry.date }}</span>
+		{% if not entry.op_id %}
+		<span><a href='/{{ entry.board }}/{{ entry.id }}'>#{{ entry.id }}</a></span>
+		{% else %}
+			<a href='#{{ entry.id }}' onclick="cite({{ entry.id }})">#{{ entry.id }}</a>
+		{% endif %}
+	</div>
+	<div class='post_body' id='{{ entry.id }}'>
+		{% if entry.fname %}
+		<a href=/static/images/{{ entry.fname }}>
+		<img class=thumb src=/static/images/thumbs/{{ entry.fname }}>
+		</a>
+		{% endif %}
+		{{ entry.text|markdown }}
+	</div>
+</div>
+{% endfor %}
+</div>
+
+<span id=right>
+	<p><b>Overboard</b></p>
+	<b>Ruuruus:</b>
+	<ul>
+		<li>foo</li>
+		<li>bar</li>
+	</ul>
+</span>
+
+</div>
+{% endblock %}

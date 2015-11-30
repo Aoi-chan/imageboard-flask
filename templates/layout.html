@@ -1,0 +1,26 @@
+<!doctype html>
+<title>/{{ board }}/</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
+{% block header %}
+<center>
+<div id='header'> [
+	<a href='/'>home</a>
+	<a href='/all'>all</a> ][ 
+	<a href='/learn'>learn</a>
+	<a href='/create'>create</a>
+	<a href='/media'>media</a> ]
+</div>
+{% endblock %}
+
+{% for message in get_flashed_messages() %}
+	<div class=flash>{{ message }}</div>
+{% endfor %}
+</center>
+
+{% block body %}{% endblock %}
+<script>
+function cite(id) {
+	document.getElementById('comment').value+="[@" + id + "](#" + id + ")\n";
+}
+</script>

@@ -1,0 +1,96 @@
+body {
+	color: #222450;
+	background: #EEF2FF;
+	margin: 0;
+}
+a {
+	color: #405086;
+	text-decoration: none;
+}
+p {
+	margin: 10px 0;
+}
+
+textarea, input {
+	border: 1px solid #aaa;
+	background-color: #eef2ff;
+	padding: 4px;
+	color: #444;
+	margin: 0;
+	width: 97%;
+}
+
+th {
+	background-color: #98E;
+	border: solid 1px #000;
+}
+
+hr {
+	border: 1px solid #B7C5D9;
+	margin: 20px 0;
+}
+
+blockquote {
+	border-left: 2px solid #EEF2FF;
+	padding: 0px 8px;
+	margin: 0;
+}
+
+.post, .catalog {
+	background: #D6DAF0;
+	border-radius: 2px;
+	display: table;
+	padding: 6px 8px 0 8px;
+	margin: 5px;
+}
+.catalog {
+	display: inline-block;
+}
+.thread {
+	display: table;
+	padding: 0 12px 0 12px;
+	margin: 5px;
+}
+.byline {
+	font-size: 11px;
+	color: #98A4C6;
+}
+.post img.thumb {
+	max-width: 200px;
+	max-height: 200px;
+	padding: 10px 10px 10px 0px;
+}
+.thread img.thumb {
+	max-width: 300px;
+	max-height: 300px;
+	padding: 10px 10px 10px 0px;
+}
+
+#wrap {
+	width: 1000px;
+	margin: 50px auto;
+}
+#left {
+	width: 650px;
+	float: left;
+}
+#right {
+	width: 300px;
+	height:600px;
+	float: right;
+	background: #D6DAF0;
+	border-radius: 2px;
+	display: table;
+	padding: 10px;
+	margin: 5px;
+}
+#header {
+	width: 100%;
+	height: 20px;
+	background: #D6DAF0;
+	margin-bottom: 50px;
+	border-radius: 2px;
+	padding-top: 4px;
+	word-spacing: 4px;
+}
+#comment {}
