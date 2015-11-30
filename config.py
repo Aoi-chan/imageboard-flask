@@ -2,7 +2,7 @@ import os
 
 DEBUG = True
 SECRET_KEY = 'hunter2'
-SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+SQLALCHEMY_DATABASE_URI = 'sqlite:///posts.db'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 BUMP_LIMIT         = 100
