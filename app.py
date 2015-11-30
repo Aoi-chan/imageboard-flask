@@ -19,6 +19,9 @@ from config import *
 from util import *
 from models import *
 
+db.create_all()
+db.session.commit()
+
 @app.route('/')
 def show_frontpage():
     return render_template('home.html')
