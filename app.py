@@ -1,4 +1,4 @@
-from flask import Flask, request, session, redirect, render_template
+from flask import Flask, request, redirect, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask.ext.misaka import Misaka
@@ -120,5 +120,6 @@ def add_reply():
     return redirect('/' + board + '/' + op_id)
 
 if __name__ == '__main__':
-    print('Database is', SQLALCHEMY_DATABASE_URI)
+    print(' * Running on http://localhost:5000/ (Press Ctrl-C to quit)')
+    print(' * Database is', SQLALCHEMY_DATABASE_URI)
     app.run()

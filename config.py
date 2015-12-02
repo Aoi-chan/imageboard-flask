@@ -2,10 +2,7 @@
 # configuration should not be checked into source control. See:
 # http://blog.arvidandersson.se/2013/06/10/credentials-in-git-repos
 
-import os
-
 DEBUG = True
-SECRET_KEY = 'hunter2'
 SQLALCHEMY_DATABASE_URI = 'sqlite:///posts.db'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
