@@ -32,7 +32,7 @@
 	<div class='post_body' id='{{ entry.id }}'>
 		{% if entry.fname %}
 		<a href=/static/images/{{ entry.fname }}>
-		<img class=thumb src=/static/images/thumbs/{{ entry.fname }}>
+		<img class=thumb src=/static/thumbs/{{ entry.fname }}>
 		</a>
 		{% endif %}
 		{{ entry.text|markdown }}
