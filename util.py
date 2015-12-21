@@ -2,6 +2,8 @@ from flask import request, flash, redirect, url_for
 from time import time
 from os.path import join
 from PIL import Image
+from models import Boards, Posts
+from app import db
 
 from config import *
 
@@ -40,3 +42,24 @@ def no_content_or_image():
         flash('Must include a comment or image')
         return True
     return False
+
+def get_replies(thread):
+    return db.session.query(Posts).filter_by(op_id = thread).all()
+
+def get_last_replies(thread):
+    return db.session.query(Posts).filter_by(op_id = thread).order_by(db.text('id desc')).limit(5)
+
+def get_OPs(board):
+    return db.session.query(Posts).filter_by(op_id = '0', board = board).order_by(db.text('last_bump desc')).limit(10)
+
+def get_OPs_catalog(board):
+    return db.session.query(Posts).filter_by(op_id = '0', board = board).order_by(db.text('last_bump desc')).limit(100)
+
+def get_OPs_all():
+    return db.session.query(Posts).filter_by(op_id = '0'               ).order_by(db.text('last_bump desc')).limit(10)
+
+def get_thread_OP(id):
+    return db.session.query(Posts).filter_by(id = id).all()
+
+def get_sidebar(board):
+    return db.session.query(Boards).filter_by(name=board).first()

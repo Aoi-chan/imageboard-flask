@@ -17,7 +17,6 @@ db = SQLAlchemy(app)
 
 from config import *
 from util import *
-from models import *
 
 db.create_all()
 db.session.commit()
@@ -28,10 +27,10 @@ def show_frontpage():
 
 @app.route('/all/')
 def show_all():
-    OPs = db.session.query(Posts).filter_by(op_id = '0').order_by(db.text('last_bump desc')).limit(10)
+    OPs = get_OPs_all()
     list = []
     for OP in OPs:
-        replies = db.session.query(Posts).filter_by(op_id = OP.id).order_by(db.text('id desc')).limit(5)
+        replies = get_last_replies(OP.id)
         list.append(OP)
         list += replies[::-1]
 
@@ -41,29 +40,29 @@ def show_all():
 def show_board(board):
     if board_inexistent(board):
         return redirect('/')
-    OPs = db.session.query(Posts).filter_by(op_id = '0', board = board).order_by(db.text('last_bump desc')).limit(10)
+    OPs = get_OPs(board)
     list = []
     for OP in OPs:
-        replies = db.session.query(Posts).filter_by(op_id = OP.id).order_by(db.text('id desc')).limit(5)
+        replies = get_last_replies(OP.id)
         list.append(OP)
         list += replies[::-1]
 
-    sidebar = db.session.query(Boards).filter_by(name=board).first()
+    sidebar = get_sidebar(board)
 
     return render_template('show_board.html', entries=list, board=board, sidebar=sidebar, id=0)
 
 @app.route('/<board>/catalog')
 def show_catalog(board):
-    OPs = db.session.query(Posts).filter_by(op_id = '0', board = board).order_by(db.text('last_bump desc')).limit(100)
-    sidebar = db.session.query(Boards).filter_by(name=board).first()
+    OPs = get_OPs_catalog(board)
+    sidebar = get_sidebar(board)
 
     return render_template('show_catalog.html', entries=OPs, board=board, sidebar=sidebar)
 
 @app.route('/<board>/<id>/')
 def show_thread(board, id):
-    OP      = db.session.query(Posts).filter_by(id = id).all()
-    replies = db.session.query(Posts).filter_by(op_id = id).all()
-    sidebar = db.session.query(Boards).filter_by(name=board).first()
+    OP      = get_thread_OP(id)
+    replies = get_replies(id)
+    sidebar = get_sidebar(board)
 
     return render_template('show_thread.html', entries=OP+replies, board=board, id=id, sidebar=sidebar)
 
