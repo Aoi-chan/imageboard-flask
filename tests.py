@@ -9,7 +9,7 @@ class FlaskTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
     # Redirects on inexistent board?
-    def test_main_route_requires_login(self):
+    def test_redirect_inexistent_board(self):
         tester = app.test_client(self)
         response = tester.get('/foo', follow_redirects = True)
         self.assertIn(b'board foo does not exist', response.data)
