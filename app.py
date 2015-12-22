@@ -71,52 +71,34 @@ def new_thread():
     board = request.form['board']
     if no_image():
         return redirect('/' + board + '/')
-    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    fname = upload_file()
 
-    newPost = Posts(board   = board,
-                    name    = request.form['name'],
-                    subject = request.form['subject'],
-                    email   = request.form['email'],
-                    text    = request.form['post_content'],
-                    date    = date,
-                    fname   = fname,
-                    op_id   = 0)     # Threads are normal posts with op_id set to 0
-
+    newPost = new_post(board)
     newPost.last_bump = datetime.now()
-
     db.session.add(newPost)
     db.session.commit()
     return redirect('/' + board + '/')
 
 @app.route('/add_reply', methods=['POST'])
 def add_reply():
-    board = request.form['board']
-    op_id = request.form['op_id']
-    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    board  = request.form['board']
+    thread = request.form['op_id']
     if no_content_or_image():
         return redirect('/' + board + '/')
-    fname = upload_file()
 
-    newPost = Posts(board   = board,
-                    name    = request.form['name'],
-                    subject = request.form['subject'],
-                    email   = request.form['email'],
-                    text    = request.form['post_content'],
-                    date    = date,
-                    fname   = fname,
-                    op_id   = op_id)
-
+    newPost = new_post(board, thread)
     db.session.add(newPost)
-
-    reply_count = db.session.query(Posts).filter_by(op_id = op_id).count()
-    if 'sage' not in request.form['email'] and reply_count < BUMP_LIMIT:
-        OP = db.session.query(Posts).filter_by(id = op_id).first()
-        OP.last_bump = datetime.now()
-        db.session.add(OP)
-
+    if 'sage' not in request.form['email'] and reply_count(thread) < BUMP_LIMIT:
+        bump_thread(thread)
     db.session.commit()
-    return redirect('/' + board + '/' + op_id)
+    return redirect('/' + board + '/' + thread)
+
+@app.route('/del')
+def delete():
+    post_id = request.args.get('id')
+    delete_post(post_id)
+    board   = request.args.get('board')
+    thread  = request.args.get('thread')
+    return redirect('/' + board + '/' + thread)
 
 if __name__ == '__main__':
     print(' * Running on http://localhost:5000/ (Press Ctrl-C to quit)')

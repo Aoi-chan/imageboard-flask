@@ -21,6 +21,7 @@
 		</span>
 		<span>{{ entry.date }}</span>
 		<a href='#{{ entry.id }}' onclick="cite({{ entry.id }})">#{{ entry.id }}</a>
+		<a href="{{ url_for('delete') }}?id={{entry.id}}&board={{board}}&thread={{entry.op_id}}">delete</a>
 	</div>
 	<div class='post_body' id='{{ entry.id }}'>
 		{% if entry.fname %}

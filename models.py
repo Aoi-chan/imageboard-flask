@@ -19,3 +19,4 @@ class Posts(db.Model):
     fname     = db.Column(db.String)
     text      = db.Column(db.Text)
     last_bump = db.Column(db.DateTime)
+    deleted   = db.Column(db.Boolean)
