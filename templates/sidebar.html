@@ -1,0 +1,16 @@
+<span id=right>
+	<p><b>{{ sidebar.long_name }}</b></p>
+	{{ sidebar.description|markdown if sidebar }}
+	{% if board != 'all' %}
+	<form action="{{ url_for('add_reply') }}" enctype=multipart/form-data method=post>
+		<input type="hidden" name="board" value="{{ board }}">
+		<input type="hidden" name="op_id" value="{{ id }}">
+		<input type=text name=name placeholder=Name>
+		<input type=text name=email placeholder=Email>
+		<input type=text name=subject placeholder=Subject>
+		<textarea id=comment name=post_content rows=8></textarea>
+		<input type=file name=file>
+		<input type=submit value=Reply style='width: 100%'>
+	</form>
+	{% endif %}
+</span>
